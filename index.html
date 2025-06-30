@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -41,7 +40,7 @@
 </head>
 <body>
   <div class="container">
-    <h2>🛠️ Noxious WA Controller</h2>
+    <h2>🛠️ Noxious bug</h2>
     <p>Kirim perintah <code>#bug</code> ke Bot WhatsApp</p>
     <label>Nomor Target (cth: 628xxxx)</label>
     <input id="target" placeholder="Masukkan nomor target">
@@ -54,7 +53,7 @@
   </div>
 
   <script>
-    const apiUrl = "/api/send";
+    const apiUrl = "http://faiznideck.inipanel.my.id:2024/send";
 
     async function kirim() {
       const target = document.getElementById("target").value.trim();
