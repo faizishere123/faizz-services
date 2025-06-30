@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Bot WhatsApp</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f172a;
+      color: white;
+      padding: 20px;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background-color: #22c55e;
+      color: white;
+      cursor: pointer;
+    }
+    #status {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🟢 Test Kirim Pesan ke Bot WA</h2>
+
+  <label for="number">Nomor Tujuan (cth: 6281234567890)</label>
+  <input type="text" id="number" placeholder="Masukkan nomor WhatsApp">
+
+  <label for="message">Isi Pesan</label>
+  <textarea id="message" rows="4" placeholder="Tulis pesan..."></textarea>
+
+  <button onclick="kirimPesan()">Kirim Pesan</button>
+
+  <div id="status">Status: -</div>
+
+  <script>
+    async function kirimPesan() {
+      const number = document.getElementById("number").value;
+      const message = document.getElementById("message").value;
+      const statusDiv = document.getElementById("status");
+
+      statusDiv.innerText = "⏳ Mengirim...";
+
+      try {
+        const res = await fetch("http://167.172.76.124:3000/send-message", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            number: number,
+            message: message
+          })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          statusDiv.innerText = "✅ " + data.status + ": " + data.msg;
+        } else {
+          statusDiv.innerText = "❌ Gagal: " + (data.error || "Terjadi kesalahan");
+        }
+
+      } catch (error) {
+        statusDiv.innerText = "❌ Error koneksi: " + error.message;
+      }
+    }
+  </script>
+
+</body>
+</html>
