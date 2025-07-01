@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Noxious Web Controller</title>
+  <title>Noxious Controller</title>
   <style>
     body {
       background-color: #111;
@@ -65,7 +65,7 @@
         return;
       }
 
-      fetch('http://167.172.76.124:3000/api/send-message', {
+      fetch('http://167.172.76.124:3000/wa-api', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ number: number, message: message })
