@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>RITUAL PEMANGGILAN ACANG</title>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #39ff14;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      color: #ff00ff;
+    }
+
+    .tombolGlowAcang {
+      background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff);
+      background-size: 300%;
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      margin: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 12px #00ffff;
+      animation: glowTakTerhindarkan 3s linear infinite;
+    }
+
+    @keyframes glowTakTerhindarkan {
+      0% { background-position: 0%; }
+      100% { background-position: 300%; }
+    }
+
+    #notifikasiCountdownAcang {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #00ff99;
+    }
+
+    #gambarAnimeLucuYangTibaTibaMuncul {
+      margin-top: 25px;
+      display: none;
+      max-width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #ff00ff;
+    }
+
+    marquee {
+      margin-top: 40px;
+      color: #ff00ff;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔮 RITUAL PEMANGGILAN ACANG</h1>
+
+  <button class="tombolGlowAcang" onclick="mulaiCountdownAcangDenganAnimeLucu()">KLIK UNTUK MEMANGGIL ACANG</button>
+
+  <div id="notifikasiCountdownAcang"></div>
+
+  <img id="gambarAnimeLucuYangTibaTibaMuncul" src="https://files.catbox.moe/yufni9.jpg" alt="rowrrrrr">
+
+  <script>
+    function mulaiCountdownAcangDenganAnimeLucu() {
+      const output = document.getElementById("notifikasiCountdownAcang");
+      const gambar = document.getElementById("gambarAnimeLucuYangTibaTibaMuncul");
+      let hitung = 3;
+
+      gambar.style.display = "none";
+      output.textContent = "⚠️ Acang akan mendatangimu dalam " + hitung + "...";
+
+      const interval = setInterval(() => {
+        hitung--;
+        if (hitung > 0) {
+          output.textContent = "⚠️ Acang akan mendatangimu dalam " + hitung + "...";
+        } else {
+          clearInterval(interval);
+          output.textContent = "💀 Acang telah datang. Jangan lari. Sudah terlambat...";
+          gambar.style.display = "block";
+        }
+      }, 1000);
+    }
+  </script>
+
+  <marquee behavior="scroll" direction="left" scrollamount="6">
+    ⚠️ Acang adalah entitas multidimensi hasil kompresi pikiran HTML dan JavaScript — ia muncul saat variabel kehilangan arti dan tombol terlalu bercahaya. Jangan percaya apa yang tidak bisa kamu parse... Karena Acang selalu di balik console.log...
+  </marquee>
+
+</body>
+</html>
