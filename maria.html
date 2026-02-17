@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Janji Untuk Maria Indry 🤍</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffd6e8,#ffeef7);
+    font-family:'Segoe UI',sans-serif;
+    overflow:hidden;
+    text-align:center;
+}
+
+.card{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    max-width:400px;
+    position:relative;
+}
+
+h1{ color:#ff4d88; }
+
+p{
+    color:#555;
+    font-size:16px;
+    margin-bottom:30px;
+}
+
+.btn{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.yes{
+    background:#ff4d88;
+    color:white;
+    margin-right:10px;
+}
+
+.yes:hover{
+    background:#ff1a66;
+    transform:scale(1.1);
+}
+
+.no{
+    background:#ccc;
+    color:#333;
+    position:absolute;
+}
+
+.message{
+    margin-top:20px;
+    font-size:18px;
+    color:#ff4d88;
+    display:none;
+    animation:fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Maria Indry 🤍</h1>
+    <p>
+        Aku sadar aku pernah salah…  
+        Tapi kali ini aku benar-benar mau berubah.  
+        Aku janji nggak akan pernah bohong lagi sama kamu 🤍
+    </p>
+
+    <button class="btn yes" onclick="janji()">Aku Janji 🤍</button>
+    <button class="btn no" id="noBtn">Tidak 🙃</button>
+
+    <div class="message" id="message"></div>
+</div>
+
+<!-- Sound Meme Cringe -->
+<audio id="cringeSound">
+    <!-- Kamu bisa ganti link ini dengan sound cringe lain -->
+    <source src="https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const cringeSound = document.getElementById("cringeSound");
+let sudahKlik = false;
+
+function moveButton(){
+    if(sudahKlik) return;
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("touchstart", moveButton);
+
+noBtn.addEventListener("click", function(){
+    sudahKlik = true;
+    cringeSound.play();
+    document.getElementById("message").innerHTML =
+        "😭 YAHH DIPENCET... malu banget sih tapi aku tetap janji nggak bohong lagi 🤍";
+    document.getElementById("message").style.display = "block";
+});
+
+function janji(){
+    document.getElementById("message").innerHTML =
+        "Makasih sudah percaya lagi 🤍 Aku bakal buktiin aku bisa berubah ✨";
+    document.getElementById("message").style.display = "block";
+}
+</script>
+
+</body>
+</html>
