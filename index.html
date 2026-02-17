@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Janji Untuk Maria Indry 🤍</title>
+<title>Maria Indry 🤍</title>
 
 <style>
 body{
@@ -13,19 +13,28 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#ffd6e8,#ffeef7);
     font-family:'Segoe UI',sans-serif;
     overflow:hidden;
     text-align:center;
+    background:linear-gradient(-45deg,#ffd6e8,#ffeef7,#ffc2d1,#ffe6f0);
+    background-size:400% 400%;
+    animation:bgMove 8s ease infinite;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
 
 .card{
     background:white;
     padding:40px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.1);
-    max-width:400px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.15);
+    max-width:420px;
     position:relative;
+    z-index:2;
 }
 
 h1{ color:#ff4d88; }
@@ -49,10 +58,10 @@ p{
     background:#ff4d88;
     color:white;
     margin-right:10px;
+    box-shadow:0 0 15px #ff99bb;
 }
 
 .yes:hover{
-    background:#ff1a66;
     transform:scale(1.1);
 }
 
@@ -67,12 +76,27 @@ p{
     font-size:18px;
     color:#ff4d88;
     display:none;
-    animation:fadeIn 0.8s ease forwards;
+    animation:fadeIn 1s ease forwards;
 }
 
 @keyframes fadeIn{
     from{opacity:0; transform:translateY(10px);}
     to{opacity:1; transform:translateY(0);}
+}
+
+/* HATI JATUH */
+.heart{
+    position:fixed;
+    top:-10px;
+    font-size:20px;
+    animation:fall 5s linear infinite;
+    z-index:1;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+    }
 }
 </style>
 </head>
@@ -92,10 +116,13 @@ p{
     <div class="message" id="message"></div>
 </div>
 
-<!-- Sound Meme Cringe -->
+<!-- SOUND -->
 <audio id="cringeSound">
-    <!-- Kamu bisa ganti link ini dengan sound cringe lain -->
     <source src="https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3" type="audio/mpeg">
+</audio>
+
+<audio autoplay loop>
+    <source src="https://www.myinstants.com/media/sounds/romantic-background-music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -103,10 +130,11 @@ const noBtn = document.getElementById("noBtn");
 const cringeSound = document.getElementById("cringeSound");
 let sudahKlik = false;
 
+// tombol pindah
 function moveButton(){
     if(sudahKlik) return;
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 }
@@ -114,19 +142,45 @@ function moveButton(){
 noBtn.addEventListener("mouseover", moveButton);
 noBtn.addEventListener("touchstart", moveButton);
 
+// kalau dipencet tidak
 noBtn.addEventListener("click", function(){
     sudahKlik = true;
     cringeSound.play();
+    if(navigator.vibrate) navigator.vibrate(200);
+
     document.getElementById("message").innerHTML =
-        "😭 YAHH DIPENCET... malu banget sih tapi aku tetap janji nggak bohong lagi 🤍";
+        "😔 Yakinn nii tetep nggak maafin aku? <br>Dah susah loo buat web nyaaa 🙃<br>Tapi aku tetap janji nggak bohong lagi 🤍";
+
     document.getElementById("message").style.display = "block";
 });
 
+// kalau pencet aku janji
 function janji(){
+    if(navigator.vibrate) navigator.vibrate([100,50,100]);
+
     document.getElementById("message").innerHTML =
-        "Makasih sudah percaya lagi 🤍 Aku bakal buktiin aku bisa berubah ✨";
+        "😭 Makasih sudah percaya lagi 🤍 Aku bakal buktiin aku bisa berubah ✨";
+
     document.getElementById("message").style.display = "block";
+
+    // efek glow
+    document.querySelector(".card").style.boxShadow =
+        "0 0 40px #ff99bb";
 }
+
+// hati jatuh
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{heart.remove()},5000);
+}
+
+setInterval(createHeart,500);
 </script>
 
 </body>
