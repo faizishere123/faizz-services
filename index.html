@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maaf Ya Sayangg 🤍</title>
+<title>Untuk mariaa🤍</title>
 
 <style>
 body{
@@ -16,53 +16,93 @@ body{
   background:linear-gradient(135deg,#ffb6d9,#ffd6ec,#fff0f7);
   font-family:'Comic Sans MS', cursive;
   overflow:hidden;
-  transition:1s;
+  transition:1.5s;
 }
 
 .card{
   background:white;
   padding:40px;
-  border-radius:25px;
-  box-shadow:0 15px 40px rgba(255,105,180,0.4);
+  border-radius:30px;
   text-align:center;
   max-width:380px;
+  box-shadow:0 0 30px rgba(255,105,180,0.6);
+  animation:pulse 2s infinite alternate;
+  position:relative;
+  z-index:2;
+}
+
+@keyframes pulse{
+  from{box-shadow:0 0 20px rgba(255,105,180,0.5);}
+  to{box-shadow:0 0 50px rgba(255,20,147,0.9);}
 }
 
 button{
   margin:10px;
-  padding:12px 20px;
+  padding:12px 22px;
   border:none;
-  border-radius:20px;
+  border-radius:25px;
   font-size:15px;
   cursor:pointer;
   transition:0.3s;
 }
 
 .btn-yes{
-  background:#ff4da6;
+  background:#ff1493;
   color:white;
 }
 
+.btn-yes:hover{
+  transform:scale(1.1);
+}
+
 .btn-no{
-  background:#ccc;
+  background:#ddd;
+}
+
+#typedText{
+  margin-top:20px;
+  font-weight:bold;
+  color:#ff1493;
+  min-height:60px;
+}
+
+.heart{
+  position:absolute;
+  font-size:20px;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  0%{top:-10%; opacity:1;}
+  100%{top:110%; opacity:0;}
+}
+
+.sparkle{
+  position:absolute;
+  font-size:15px;
+  animation:blink 1s infinite alternate;
+}
+
+@keyframes blink{
+  from{opacity:0.2;}
+  to{opacity:1;}
 }
 </style>
 </head>
 <body>
 
 <div class="card">
-  <h1>Maaf yaaa sayangg 🥺🤍</h1>
-  <p>Kamu itu lebih berhargaaa dari omongan orang lain 💖</p>
+  <h2>Maaf yaaa sayangg 🥺🤍</h2>
+  <p>Kamu lebih berhargaaa dari omongan siapa pun 💖</p>
 
   <button class="btn-yes" onclick="romance()">Iyaaaa 🤍</button>
   <button class="btn-no" id="runBtn">Gamau, masih kepikiran 😤</button>
 
-  <div id="sweetMessage"></div>
+  <div id="typedText"></div>
 </div>
 
-<!-- MUSIC ROMANTIC (STABIL & GRATIS) -->
 <audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2023/03/27/audio_3d5f2d0a7c.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/audio/2022/10/25/audio_946b7e0d13.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -78,24 +118,57 @@ runBtn.addEventListener("mouseover", function(){
 });
 
 function romance(){
-  let music = document.getElementById("music");
+  let music=document.getElementById("music");
+  music.play();
 
-  music.play().then(()=>{
-    console.log("Music jalan 💕");
-  }).catch(()=>{
-    alert("Klik lagi yaa sayang biar music nyala 🤍");
-  });
+  document.body.style.background="linear-gradient(135deg,#2b0033,#800040,#ff1493)";
 
-  document.body.style.background="linear-gradient(135deg,#ff69b4,#ff1493,#ffc0cb)";
+  loveRain();
+  sparkleEffect();
+  typeEffect();
+}
 
-  document.getElementById("sweetMessage").innerHTML = `
-    <p style="color:#ff1493; font-weight:bold; margin-top:20px;">
-      Makasihhh yaaa sayanggg 🤍🥹<br><br>
-      Jangan dengerin omongan orang lagiii…<br>
-      Kamu itu lebih berhargaaaa dari apapun 💖<br><br>
-      Buat aku kamu selalu istimewa ✨🥰
-    </p>
-  `;
+// hujan love
+function loveRain(){
+  for(let i=0;i<40;i++){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"%";
+    heart.style.fontSize=(Math.random()*20+15)+"px";
+    heart.style.animationDuration=(Math.random()*3+3)+"s";
+    document.body.appendChild(heart);
+  }
+}
+
+// sparkle
+function sparkleEffect(){
+  for(let i=0;i<25;i++){
+    let s=document.createElement("div");
+    s.className="sparkle";
+    s.innerHTML="✨";
+    s.style.left=Math.random()*100+"%";
+    s.style.top=Math.random()*100+"%";
+    document.body.appendChild(s);
+  }
+}
+
+// efek ketik
+function typeEffect(){
+  const text = "Makasihhh yaaa sayanggg 🤍🥹\nJangan dengerin omongan orang lagiii...\nKamu itu lebih berhargaaaa dari apapun 💖\nBuat aku kamu selalu cukup, selalu istimewa ✨🥰";
+  let i=0;
+  let speed=50;
+  let target=document.getElementById("typedText");
+  target.innerHTML="";
+
+  function typing(){
+    if(i<text.length){
+      target.innerHTML+= text.charAt(i)=="\n" ? "<br>" : text.charAt(i);
+      i++;
+      setTimeout(typing,speed);
+    }
+  }
+  typing();
 }
 </script>
 
