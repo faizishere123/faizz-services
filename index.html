@@ -1,176 +1,492 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Kamu 🤍</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖 Sesya</title>
+    <!-- Font keren & efek typing -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-body{
-  margin:0;
-  padding:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(135deg,#ffb6d9,#ffd6ec,#fff0f7);
-  font-family:'Comic Sans MS', cursive;
-  overflow:hidden;
-  transition:1.5s;
-}
+        body {
+            background: linear-gradient(145deg, #fce9f0 0%, #f8dbe9 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Quicksand', sans-serif;
+            padding: 20px;
+        }
 
-.card{
-  background:white;
-  padding:40px;
-  border-radius:30px;
-  text-align:center;
-  max-width:380px;
-  box-shadow:0 0 30px rgba(255,105,180,0.6);
-  animation:pulse 2s infinite alternate;
-  position:relative;
-  z-index:2;
-}
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 245, 248, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 56px;
+            padding: 35px 30px;
+            box-shadow: 0 20px 50px rgba(180, 70, 120, 0.25);
+            border: 1px solid #ffd9e7;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
 
-@keyframes pulse{
-  from{box-shadow:0 0 20px rgba(255,105,180,0.5);}
-  to{box-shadow:0 0 50px rgba(255,20,147,0.9);}
-}
+        /* Sembunyikan halaman */
+        .page {
+            display: none;
+            animation: fade 0.5s ease;
+        }
 
-button{
-  margin:10px;
-  padding:12px 22px;
-  border:none;
-  border-radius:25px;
-  font-size:15px;
-  cursor:pointer;
-  transition:0.3s;
-}
+        .page.active {
+            display: block;
+        }
 
-.btn-yes{
-  background:#ff1493;
-  color:white;
-}
+        @keyframes fade {
+            0% { opacity: 0; transform: translateY(12px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
 
-.btn-yes:hover{
-  transform:scale(1.1);
-}
+        h1, h2 {
+            font-family: 'Dancing Script', cursive;
+            color: #7c2f5a;
+            margin-bottom: 20px;
+        }
 
-.btn-no{
-  background:#ddd;
-}
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.2rem; }
 
-#typedText{
-  margin-top:20px;
-  font-weight:bold;
-  color:#ff1493;
-  min-height:60px;
-}
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
 
-.heart{
-  position:absolute;
-  font-size:20px;
-  animation:fall linear infinite;
-}
+        .btn {
+            background: #ff88b0;
+            border: none;
+            padding: 16px 42px;
+            border-radius: 60px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #b34a74, 0 6px 18px rgba(190, 70, 120, 0.3);
+            transition: all 0.08s linear;
+            font-family: 'Quicksand', sans-serif;
+            letter-spacing: 1px;
+            min-width: 120px;
+        }
 
-@keyframes fall{
-  0%{top:-10%; opacity:1;}
-  100%{top:110%; opacity:0;}
-}
+        .btn:active {
+            transform: translateY(8px);
+            box-shadow: 0 0 0 #b34a74;
+        }
 
-.sparkle{
-  position:absolute;
-  font-size:15px;
-  animation:blink 1s infinite alternate;
-}
+        .btn-secondary {
+            background: #b0b0b0;
+            box-shadow: 0 8px 0 #6f6f6f;
+        }
 
-@keyframes blink{
-  from{opacity:0.2;}
-  to{opacity:1;}
-}
-</style>
+        .btn-secondary:active {
+            transform: translateY(8px);
+            box-shadow: 0 0 0 #6f6f6f;
+        }
+
+        .btn-pink {
+            background: #ff6f9e;
+            box-shadow: 0 8px 0 #b34a74;
+        }
+
+        .pin-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .pin-input input {
+            padding: 15px 25px;
+            font-size: 1.8rem;
+            text-align: center;
+            border: 3px solid #ffb6d0;
+            border-radius: 70px;
+            width: 220px;
+            background: #fff6fa;
+            font-weight: 600;
+            color: #451f33;
+            outline: none;
+            letter-spacing: 6px;
+            transition: 0.2s;
+        }
+
+        .pin-input input:focus {
+            border-color: #db6f97;
+            box-shadow: 0 0 0 5px #ffd3e4;
+        }
+
+        .romantic-text {
+            background: #fff0f6;
+            padding: 28px 22px;
+            border-radius: 48px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 0 1px #ffe2ef;
+            text-align: left;
+        }
+
+        .typing-effect {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.9rem;
+            line-height: 1.5;
+            color: #422334;
+            min-height: 300px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-weight: 600;
+        }
+
+        .typing-effect::after {
+            content: '|';
+            animation: blink 0.9s step-end infinite;
+            color: #d44b7a;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .lucu-area {
+            background: #fce5b5;
+            padding: 30px 20px;
+            border-radius: 100px 20px 100px 20px;
+            margin-top: 25px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #6a3f1f;
+            box-shadow: 0 10px 0 #c29a6b;
+            transition: all 0.2s;
+            cursor: default;
+            border: 3px dashed #ffa55c;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .lucu-area span {
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .notif {
+            background: #ffd9e7;
+            padding: 14px 20px;
+            border-radius: 60px;
+            color: #902f5e;
+            font-weight: 600;
+            margin: 15px 0;
+            border-left: 6px solid #cf4370;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .move-btn {
+            transition: all 0.15s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container { padding: 25px 15px; }
+            h1 { font-size: 2.4rem; }
+            .btn { padding: 14px 25px; font-size: 1.2rem; min-width: 100px; }
+        }
+    </style>
 </head>
 <body>
+<div class="container" id="appContainer">
+    <!-- HALAMAN 1: Apakah benar Sesya Aulia Novalizah? -->
+    <div id="page1" class="page active">
+        <h1>🌸 Sesya Aulia Novalizah?</h1>
+        <p style="font-size: 1.4rem; color: #4f2c3f;">Apakah ini kamu? <br> <span style="font-weight: 300;">(jujur ya ❤️)</span></p>
+        <div class="btn-group">
+            <button class="btn" id="btnYa">Ya, benar!</button>
+            <button class="btn btn-secondary" id="btnTidak">Tidak</button>
+        </div>
+        <div id="notifSesya" class="notif hidden"> pilih ya!!!</div>
+    </div>
 
-<div class="card">
-  <h2>Maaf yaaa sayangg 🥺🤍</h2>
-  <p>Kamu lebih berhargaaa dari omongan siapa pun 💖</p>
+    <!-- HALAMAN 2: PIN (tanggal lahir 141109) -->
+    <div id="page2" class="page">
+        <h2>🔐 Masukkan PIN</h2>
+        <p style="color: #5a3c4a;">Tanggal lahir Sesya (6 digit)</p>
+        <div class="pin-input">
+            <input type="password" id="pinInput" maxlength="6" placeholder="141109" inputmode="numeric">
+            <button class="btn btn-pink" id="btnPin">Buka ❤️</button>
+        </div>
+        <div id="pinError" class="notif hidden">❌ PIN salah. Masukkan tanggal bulan lahir Sesya (141109)</div>
+    </div>
 
-  <button class="btn-yes" onclick="romance()">Iyaaaa 🤍</button>
-  <button class="btn-no" id="runBtn">Gamau, masih kepikiran 😤</button>
-
-  <div id="typedText"></div>
+    <!-- HALAMAN 3: Kata romantis + tombol terima/tidak -->
+    <div id="page3" class="page">
+        <h2>💌 Untuk Sesya</h2>
+        <div class="romantic-text">
+            <div id="typingArea" class="typing-effect"></div>
+        </div>
+        <div class="flex-center" style="margin-top: 18px;">
+            <button class="btn" id="btnTerima">Terima 💖</button>
+            <button class="btn btn-secondary move-btn" id="btnTidakRomantis">Tidak 🙈</button>
+        </div>
+        <div id="lucuContainer" class="lucu-area hidden">
+            <span id="lucuText">😂 Hah? Kamu pindah-pindah ya? Aku di sini loh!</span>
+        </div>
+    </div>
 </div>
 
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/10/25/audio_946b7e0d13.mp3" type="audio/mpeg">
-</audio>
-
 <script>
+    (function() {
+        // DOM elements
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+        const page3 = document.getElementById('page3');
+        const notifSesya = document.getElementById('notifSesya');
+        const btnYa = document.getElementById('btnYa');
+        const btnTidak = document.getElementById('btnTidak');
+        const pinInput = document.getElementById('pinInput');
+        const btnPin = document.getElementById('btnPin');
+        const pinError = document.getElementById('pinError');
+        const typingArea = document.getElementById('typingArea');
+        const btnTerima = document.getElementById('btnTerima');
+        const btnTidakRomantis = document.getElementById('btnTidakRomantis');
+        const lucuContainer = document.getElementById('lucuContainer');
+        const lucuText = document.getElementById('lucuText');
 
-// tombol lari
-const runBtn = document.getElementById("runBtn");
-runBtn.addEventListener("mouseover", function(){
-  let x = Math.random() * (window.innerWidth - 150);
-  let y = Math.random() * (window.innerHeight - 60);
-  runBtn.style.position = "absolute";
-  runBtn.style.left = x + "px";
-  runBtn.style.top = y + "px";
-});
+        // state
+        let currentPage = 1;
+        let typingInterval = null;
+        let typingIndex = 0;
+        let fullRomanticText = '';
 
-function romance(){
-  let music=document.getElementById("music");
-  music.play();
+        // long romantic text (menyentuh hati + ingin menjadikan satu-satunya)
+        const romanticLongText = `Sesya Aulia Novalizah...\n\nSetiap detik yang berlalu, aku semakin yakin bahwa senyummu adalah sinar terang di hariku. Aku tidak tahu bagaimana menjelaskannya, tapi ketika kau tersenyum, seluruh dunia terasa lebih lembut, lebih berwarna, dan lebih hidup. Mungkin kau tidak sadar, tapi kau sudah menjadi alasan aku tersenyum di pagi hari dan mimpi indah di malam hari.\n\nAku ingin menjadi orang yang selalu ada untukmu, di saat kau tertawa, di saat kau menangis, di saat kau merasa sendiri. Bukan hanya hari ini, tapi selamanya. Aku ingin menjadikanmu satu-satunya di hidupku, satu-satunya yang buat hatiku bergetar seperti ini.\n\nKau adalah puisi yang tak pernah usai, lagu yang selalu membuatku rindu. Dan jika kau bertanya, "kenapa aku?" maka jawabanku: karena kau adalah kamu, dan tidak ada yang bisa menggantikanmu. Izinkan aku mencintaimu dengan segenap jiwa, menjagamu dengan setulus hati, dan membuat setiap hari bersamamu terasa seperti mimpi yang nyata.\n\nAku tidak sempurna, tapi bersamamu aku ingin menjadi lebih baik. Jadi, maukah kau menjadi milikku? Satu-satunya yang aku pilih, satu-satunya yang aku tunggu, dan satu-satunya yang aku cinta.\n\n— dari seseorang yang hanya ingin menjadi rumah bagimu. 💗`;
 
-  document.body.style.background="linear-gradient(135deg,#2b0033,#800040,#ff1493)";
+        // fungsi pindah halaman
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
 
-  loveRain();
-  sparkleEffect();
-  typeEffect();
-}
+        // reset efek ketik
+        function stopTyping() {
+            if (typingInterval) {
+                clearInterval(typingInterval);
+                typingInterval = null;
+            }
+        }
 
-// hujan love
-function loveRain(){
-  for(let i=0;i<40;i++){
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="💖";
-    heart.style.left=Math.random()*100+"%";
-    heart.style.fontSize=(Math.random()*20+15)+"px";
-    heart.style.animationDuration=(Math.random()*3+3)+"s";
-    document.body.appendChild(heart);
-  }
-}
+        // mulai efek ketik
+        function startTypingEffect(text, element) {
+            stopTyping();
+            typingIndex = 0;
+            element.textContent = '';
+            fullRomanticText = text;
 
-// sparkle
-function sparkleEffect(){
-  for(let i=0;i<25;i++){
-    let s=document.createElement("div");
-    s.className="sparkle";
-    s.innerHTML="✨";
-    s.style.left=Math.random()*100+"%";
-    s.style.top=Math.random()*100+"%";
-    document.body.appendChild(s);
-  }
-}
+            typingInterval = setInterval(() => {
+                if (typingIndex < fullRomanticText.length) {
+                    element.textContent += fullRomanticText.charAt(typingIndex);
+                    typingIndex++;
+                } else {
+                    clearInterval(typingInterval);
+                    typingInterval = null;
+                    // kursor tetap berkedip (css)
+                }
+            }, 45); // kecepatan sedang
+        }
 
-// efek ketik
-function typeEffect(){
-  const text = "Makasihhh yaaa sayanggg 🤍🥹\nJangan dengerin omongan orang lagiii...\nKamu itu lebih berhargaaaa dari apapun 💖\nBuat aku kamu selalu cukup, selalu istimewa ✨🥰";
-  let i=0;
-  let speed=50;
-  let target=document.getElementById("typedText");
-  target.innerHTML="";
+        // reset semua notif
+        function hideNotifs() {
+            notifSesya.classList.add('hidden');
+            pinError.classList.add('hidden');
+        }
 
-  function typing(){
-    if(i<text.length){
-      target.innerHTML+= text.charAt(i)=="\n" ? "<br>" : text.charAt(i);
-      i++;
-      setTimeout(typing,speed);
-    }
-  }
-  typing();
-}
+        // ---------- LOGIKA HALAMAN 1 ----------
+        btnYa.addEventListener('click', function() {
+            hideNotifs();
+            // pindah ke halaman pin
+            showPage('page2');
+            currentPage = 2;
+            pinInput.value = '';
+            pinError.classList.add('hidden');
+        });
+
+        btnTidak.addEventListener('click', function() {
+            notifSesya.classList.remove('hidden');
+            // sedikit efek lucu: ubah teks notif
+            notifSesya.textContent = '⚠️ Hmm... coba klik "Ya, benar!" dulu ya, atau masukkan tanggal lahir Sesya (141109) 😉';
+        });
+
+        // ---------- HALAMAN 2: PIN ----------
+        function cekPin() {
+            const pin = pinInput.value.trim();
+            if (pin === '141109') {
+                pinError.classList.add('hidden');
+                // pindah ke halaman 3 + mulai typing
+                showPage('page3');
+                currentPage = 3;
+                // reset tombol tidak romantis (posisi)
+                btnTidakRomantis.style.transform = 'translateX(0)';
+                btnTidakRomantis.style.position = 'static';
+                lucuContainer.classList.add('hidden');
+                // mulai ngetik
+                startTypingEffect(romanticLongText, typingArea);
+            } else {
+                pinError.classList.remove('hidden');
+                pinError.textContent = '❌ PIN salah. Masukkan tanggal bulan lahir Sesya (141109)';
+                // efek lucu: jika kosong
+                if (pin === '') {
+                    pinError.textContent = '❌ Jangan kosong dong! Masukkan 141109 (tanggal lahir Sesya)';
+                }
+            }
+        }
+
+        btnPin.addEventListener('click', cekPin);
+        pinInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                cekPin();
+            }
+        });
+
+        // ---------- HALAMAN 3: Tombol Terima / Tidak (lucu) ----------
+        btnTerima.addEventListener('click', function() {
+            alert('💖 Terima kasih! Aku akan selalu membuatmu bahagia, Sesya. Kamu satu-satunya! 💖');
+            // efek tambahan
+            typingArea.style.background = '#ffeef6';
+            typingArea.style.transition = '0.3s';
+        });
+
+        // Tombol "Tidak" akan berpindah tempat (lucu)
+        let moveCounter = 0;
+        btnTidakRomantis.addEventListener('click', function(e) {
+            e.preventDefault();
+            // tampilkan container lucu jika belum
+            lucuContainer.classList.remove('hidden');
+
+            const containerRect = document.querySelector('.container').getBoundingClientRect();
+            const btnRect = btnTidakRomantis.getBoundingClientRect();
+
+            // gerakkan tombol ke posisi acak di dalam container (dengan batas)
+            const containerWidth = document.querySelector('.container').clientWidth - 120;
+            const containerHeight = document.querySelector('.container').clientHeight - 100;
+
+            // posisi random
+            const randomX = Math.max(10, Math.min(containerWidth - 60, Math.random() * containerWidth));
+            const randomY = Math.max(10, Math.min(containerHeight - 60, Math.random() * containerHeight));
+
+            // pakai position relative dengan offset
+            btnTidakRomantis.style.position = 'relative';
+            btnTidakRomantis.style.left = randomX + 'px';
+            btnTidakRomantis.style.top = randomY + 'px';
+            btnTidakRomantis.style.transform = 'rotate(' + (Math.random() * 10 - 5) + 'deg)';
+
+            // ubah teks lucu
+            const lucuMessages = [
+                '😂 Hah? Kamu pindah-pindah ya? Aku di sini loh!',
+                '🙈 Jangan kabur! Aku cinta sama kamu!',
+                '😜 Halo? Aku di sini! Klik "Terima" dong!',
+                '🤪 Kamu lincah banget sih! Tapi aku tetap di sini.',
+                '🥺 Sesya... jangan gitu dong. Terima aku please~',
+                '😝 Aku bisa pindah terus! Tapi hatiku tetap untukmu.',
+                '💕 Kamu lucu banget! Tapi aku serius, terima ya!'
+            ];
+            const randomMsg = lucuMessages[Math.floor(Math.random() * lucuMessages.length)];
+            lucuText.textContent = randomMsg;
+
+            // efek kecil: tombol tidak berubah warna
+            btnTidakRomantis.style.background = '#c9a0b0';
+            setTimeout(() => {
+                btnTidakRomantis.style.background = '';
+            }, 200);
+
+            moveCounter++;
+            if (moveCounter > 8) {
+                lucuText.textContent = '😭 Sumpah, aku capek kejar-kejaran. Tapi aku tetap mau kamu! Terima aku, Sesya! 💘';
+            }
+        });
+
+        // tombol tidak juga bisa digerakkan dengan hover? kita tambahkan efek kecil saat mouse over (opsional)
+        btnTidakRomantis.addEventListener('mouseenter', function() {
+            // supaya tidak terlalu ganggu, hanya jika belum di-klik dan masih di posisi statis
+            if (!btnTidakRomantis.style.left && !btnTidakRomantis.style.top) {
+                // gerakkan sedikit
+                btnTidakRomantis.style.transform = 'translate(6px, -8px)';
+                setTimeout(() => {
+                    btnTidakRomantis.style.transform = '';
+                }, 300);
+            }
+        });
+
+        // reset ketika halaman 3 di-load (jika dari pin)
+        // tapi kita handle di cekPin
+
+        // Jika user membuka halaman 3 dari pin, typing sudah dimulai.
+        // Tambahkan juga jika user kembali ke halaman 3 (tidak ada tombol back)
+
+        // extra: jika di page3 dan tombol tidak ditekan, kita tetap tampilkan lucuContainer jika sudah muncul
+
+        // Inisialisasi: halaman 1 active
+        showPage('page1');
+        hideNotifs();
+
+        // jika user iseng menekan tombol di halaman 1
+        // sudah oke.
+
+        // Efek ketika tombol "Tidak" di halaman 1 diklik, notif muncul
+        // sudah.
+
+        // reset typing jika pindah halaman (tapi pindah halaman cuma dari pin)
+        // kita handle di cekPin
+        console.log('💖 Siap untuk Sesya!');
+
+        // Bonus: jika ingin menghentikan typing saat pindah halaman (tapi ga ada tombol back)
+        // tombol kembali tidak ada, jadi aman.
+
+        // Untuk memastikan tombol "Tidak" di halaman 3 tidak langsung kabur sebelum di klik
+        // kita set position static dulu
+        btnTidakRomantis.style.position = 'static';
+        lucuContainer.classList.add('hidden');
+
+        // jika halaman 3 aktif dan tombol tidak digerakkan
+        // kita tambahkan sedikit sentuhan: saat halaman 3 muncul, reset posisi
+        // tapi kita lakukan di showPage? tidak, karena showPage dipakai semua.
+        // kita override saat page3 muncul via cekPin
+        // cekPin sudah mereset posisi tombol.
+
+        // Tapi jika user reload di page3? tidak ada, karena page3 hanya dari pin.
+
+        // perbaiki bug: saat tombol tidak bergerak, lucuContainer bisa disembunyikan jika user pindah ke page3
+        // sudah di cekPin.
+
+        // tambahan: event listener untuk input pin supaya hanya angka
+        pinInput.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+        });
+
+    })();
 </script>
-
 </body>
 </html>
